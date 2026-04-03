@@ -42,10 +42,10 @@ class CarInterface(CarInterfaceBase):
     tire_stiffness_factor = 1.
 
     ret.stoppingControl = True
-    ret.vEgoStopping = 1.0
+    ret.vEgoStopping = 5.0
 
-    ret.longitudinalTuning.kpV = [0.1]
-    ret.longitudinalTuning.kiV = [0.0]
+    ret.longitudinalTuning.kpV = [0.5]
+    ret.longitudinalTuning.kiV = [0.1]
     ret.stopAccel = 0.0
 
     ret.longitudinalActuatorDelayUpperBound = 1.0  # s
@@ -315,9 +315,8 @@ class CarInterface(CarInterfaceBase):
       elif candidate in EV_CAR:
         ret.safetyConfigs[0].safetyParam = 1
 
-      if ret.openpilotLongitudinalControl:
-        ret.safetyConfigs[0].safetyParam |= Panda.FLAG_HYUNDAI_LONG
-
+      if ret.openpilotLongitudinalControl = False
+ret.pcmCruise = True
       if candidate in CAMERA_SCC_CAR:
         ret.safetyConfigs[0].safetyParam |= Panda.FLAG_HYUNDAI_CAMERA_SCC
 
