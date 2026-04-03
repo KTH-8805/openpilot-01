@@ -17,7 +17,7 @@ from system.swaglog import cloudlog
 
 LON_MPC_STEP = 0.2  # first step is 0.2s
 AWARENESS_DECEL = -0.15  # car smoothly decel at .2m/s^2 when user is distracted
-A_CRUISE_MIN = -1.0
+A_CRUISE_MIN = -3.5
 A_CRUISE_MAX_VALS = [1.0, 1.0, 0.8, 0.6]
 A_CRUISE_MAX_BP = [0., 15., 25., 40.]
 
@@ -56,7 +56,7 @@ class Planner:
     self.fcw = False
 
     self.a_desired = init_a
-    self.v_desired_filter = FirstOrderFilter(init_v, 2.0, DT_MDL)
+    self.v_desired_filter = FirstOrderFilter(init_v, 1.5, DT_MDL)
     self.t_uniform = np.arange(0.0, T_IDXS_MPC[-1] + 0.5, 0.5)
 
     self.v_desired_trajectory = np.zeros(CONTROL_N)
