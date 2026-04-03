@@ -44,16 +44,16 @@ ACADOS_SOLVER_TYPE = 'SQP_RTI'
 # Fewer timestamps don't hurt performance and lead to
 # much better convergence of the MPC with low iterations
 N = 12
-MAX_T = 10.0
+MAX_T = 15.0
 T_IDXS_LST = [index_function(idx, max_val=MAX_T, max_idx=N) for idx in range(N+1)]
 
 T_IDXS = np.array(T_IDXS_LST)
 T_DIFFS = np.diff(T_IDXS, prepend=[0.])
 MIN_ACCEL = -3.5
 MAX_ACCEL = 2.0
-T_FOLLOW = 1.45
-COMFORT_BRAKE = 2.5
-STOP_DISTANCE = 6.0
+T_FOLLOW = 1.8
+COMFORT_BRAKE = 2.0
+STOP_DISTANCE = 5.5
 
 def get_stopped_equivalence_factor(v_lead):
   return (v_lead**2) / (2 * COMFORT_BRAKE)
@@ -248,8 +248,8 @@ class LongitudinalMpc:
       cost_weights = [X_EGO_OBSTACLE_COST, X_EGO_COST, V_EGO_COST, A_EGO_COST, a_change_cost, J_EGO_COST]
       constraint_cost_weights = [LIMIT_COST, LIMIT_COST, LIMIT_COST, DANGER_ZONE_COST]
     elif self.mode == 'blended':
-      cost_weights = [0., 0.2, 0.25, 1.0, 0.0, 1.0]
-      constraint_cost_weights = [LIMIT_COST, LIMIT_COST, LIMIT_COST, 5.0]
+      cost_weights = [0., 0.4, 0.25, 1.0, 0.0, 1.0]
+      constraint_cost_weights = [LIMIT_COST, LIMIT_COST, LIMIT_COST, 10.0]
     elif self.mode == 'e2e':
       cost_weights = [0., 0.2, 0.25, 1., 0.0, .1]
       constraint_cost_weights = [LIMIT_COST, LIMIT_COST, LIMIT_COST, 0.0]
